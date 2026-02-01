@@ -115,20 +115,116 @@ function ListGroup() {
 }
 */
 
+// Events
+/*
 function ListGroup() {
   let items = ["Lahore", "karachi", "Islamabad", "Gujrat", "Pindi"];
-  items = [];
 
   return (
     <>
       <h1>List</h1>
       {items.length === 0 && <p>No item found!</p>}
       <ul className="list-group">
-        {items.map((item) => (
-          <li key={item}>{item}</li>
+        {items.map((item, index) => (
+          <li
+            className="list-group-item"
+            key={item}
+            onClick={() => console.log(item, index)}
+          >
+            {item}
+          </li>
         ))}
       </ul>
     </>
   );
 }
+*/
+
+/*
+import { MouseEvent } from "react";
+
+function ListGroup() {
+  let items = ["Lahore", "karachi", "Islamabad", "Gujrat", "Pindi"];
+
+  // Event handler
+  const handleClick = (e: MouseEvent) => console.log(e);
+
+  return (
+    <>
+      <h1>List</h1>
+      {items.length === 0 && <p>No item found!</p>}
+      <ul className="list-group">
+        {items.map((item, index) => (
+          <li className="list-group-item" key={item} onClick={handleClick}>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+*/
+
+/*
+import { useState } from "react";
+
+function ListGroup() {
+  let items = ["Lahore", "karachi", "Islamabad", "Gujrat", "Pindi"];
+  let selectedIndex = -1;
+
+  return (
+    <>
+      <h1>List</h1>
+      {items.length === 0 && <p>No item found!</p>}
+      <ul className="list-group">
+        {items.map((item, index) => (
+          <li
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            key={item}
+            onClick={() => (selectedIndex = index + 1)}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+*/
+
+import { useState } from "react";
+
+function ListGroup() {
+  let items = ["Lahore", "karachi", "Islamabad", "Gujrat", "Pindi"];
+
+  // Hook : A hook is a function that allow us to tap into built in feature in react
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  return (
+    <>
+      <h1>List</h1>
+      {items.length === 0 && <p>No item found!</p>}
+      <ul className="list-group">
+        {items.map((item, index) => (
+          <li
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            key={item}
+            onClick={() => setSelectedIndex(index)}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
 export default ListGroup;
