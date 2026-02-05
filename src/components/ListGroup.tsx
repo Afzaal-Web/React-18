@@ -2,7 +2,7 @@
 function ListGroup() {
   return (
     // h1 gives error because a component can not return more than one element
-    // <h1>List Group</h1>
+    // <h1>List Group</h1> // React.CreateElement('h1')
       <ul className="list-group">
         <li className="list-group-item">An item</li>
         <li className="list-group-item">A second item</li>
@@ -78,7 +78,7 @@ function ListGroup() {
   letitems = ["Lahore", "karachi", "Islamabad", "Gujrat", "Pindi"];
 items = [];
 
-  if items.length === 0) return <><h1>List</h1><p>No item found!</p>;</>
+  if items.length === 0) return <> <h1>List</h1><p>No item found!</p>;</>
   return (
     <>
       <h1>List</h1>
@@ -203,6 +203,10 @@ function ListGroup() {
   letitems = ["Lahore", "karachi", "Islamabad", "Gujrat", "Pindi"];
 
   // Hook : A hook is a function that allow us to tap into built in feature in react
+  useState(-1)
+  arr[0] // variable selectedIndex
+  arr[1] // update function
+
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   return (
@@ -230,6 +234,7 @@ function ListGroup() {
 */
 
 /*
+
 // props
 // items: [], heading: string}
 interface Props {
@@ -266,13 +271,14 @@ function ListGroup({ items, heading }: Props) {
 }
 */
 
+/*
 // passing function via props
 
 interface Props {
   items: string[];
   heading: string;
   // (item: string) => void
-  onSelectItem: (item: string) => void;
+  onSelectItem: (item: string, index: number) => void;
 }
 import { useState } from "react";
 
@@ -295,7 +301,7 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
             key={item}
             onClick={() => {
               setSelectedIndex(index);
-              onSelectItem(item);
+              onSelectItem(item, index);
             }}
           >
             {item}
@@ -305,4 +311,54 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
     </>
   );
 }
+*/
+
+// Difference between Props and Stats
+/*
+// Props                              State
+ input passed to a component          Data managed by the component
+  Smilar to func args                 smilar to local vars
+ immutable                            mutable
+ */
+
+// Passing children
+
+interface Props {
+  items: string[];
+  heading: string;
+  // (item: string) => void
+  onSelectItem: (item: string, index: number) => void;
+}
+import { useState } from "react";
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  // Hook : A hook is a function that allow us to tap into built in feature in react
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  return (
+    <>
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No item found!</p>}
+      <ul className="list-group">
+        {items.map((item, index) => (
+          <li
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            key={item}
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item, index);
+            }}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
 export default ListGroup;
