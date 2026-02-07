@@ -323,13 +323,15 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
 
 // Passing children
 
+import { useState } from "react";
+import "./ListGroup.css";
+
 interface Props {
   items: string[];
   heading: string;
   // (item: string) => void
   onSelectItem: (item: string, index: number) => void;
 }
-import { useState } from "react";
 
 function ListGroup({ items, heading, onSelectItem }: Props) {
   // Hook : A hook is a function that allow us to tap into built in feature in react
