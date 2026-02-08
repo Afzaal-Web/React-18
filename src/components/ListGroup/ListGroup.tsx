@@ -324,7 +324,22 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
 // Passing children
 
 import { useState } from "react";
-import "./ListGroup.css";
+// import styles from "./ListGroup.module.css";
+import styled from "styled-components";
+
+const List = styled.ul`
+  padding: 20px 50px;
+  list-style: none;
+`;
+
+interface ListItemProps {
+  $active: boolean;
+}
+const ListItem = styled.li<ListItemProps>`
+  padding: 5px 0;
+  background: ${(props) => (props.$active ? "#e8bd3c" : "none")};
+  color: black;
+`;
 
 interface Props {
   items: string[];
@@ -335,20 +350,17 @@ interface Props {
 
 function ListGroup({ items, heading, onSelectItem }: Props) {
   // Hook : A hook is a function that allow us to tap into built in feature in react
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
     <>
       <h1>{heading}</h1>
       {items.length === 0 && <p>No item found!</p>}
-      <ul className="list-group">
+      {/* inline style */}
+      <List style={{ border: "1px solid red" }}>
         {items.map((item, index) => (
-          <li
-            className={
-              selectedIndex === index
-                ? "list-group-item active"
-                : "list-group-item"
-            }
+          <ListItem
+            $active={index === selectedIndex}
             key={item}
             onClick={() => {
               setSelectedIndex(index);
@@ -356,9 +368,9 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
             }}
           >
             {item}
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </>
   );
 }

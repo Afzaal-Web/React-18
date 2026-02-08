@@ -1,0 +1,12 @@
+.btn{
+    padding:18px 112px;
+    border-radius: 12px;
+    border: 0px;
+    font-style: italic;
+    font-size: 36px;
+    cursor: pointer;
+}
+.btn-primary{
+    color:#fff;
+    background: rgb(18, 1, 255);
+}

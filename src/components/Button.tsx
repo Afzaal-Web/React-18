@@ -1,3 +1,5 @@
+import styles from "./Button.module.css";
+
 interface Props {
   children: string;
   color?: "primary" | "secondary" | "success";
@@ -6,7 +8,11 @@ interface Props {
 
 function Button({ children, color = "primary", onClick }: Props) {
   return (
-    <button type="button" className={`btn btn-${color} m-5`} onClick={onClick}>
+    <button
+      type="button"
+      className={[styles.btn, styles["btn-" + color]].join(" ")}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
